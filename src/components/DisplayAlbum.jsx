@@ -1,4 +1,3 @@
-import React from 'react'
 import Navbar from './Navbar';
 import { useParams } from 'react-router-dom';
 import { assets, albumsData, songsData } from '@/assets/assets';
@@ -6,8 +5,7 @@ import { assets, albumsData, songsData } from '@/assets/assets';
 const DisplayAlbum = () => {
   const { id } = useParams();
   const album = albumsData.find((item) => item.id === parseInt(id));
-  //const songs = songsData.filter((item) => item.albumId === parseInt(id));
-  const songs = songsData;
+  const songs = songsData.filter((item) => item.albumId === parseInt(id));
 
   return (
     <>

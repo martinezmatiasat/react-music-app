@@ -3,15 +3,26 @@ import { assets } from '@/assets/assets';
 import { PlayerContext } from '@/context/PlayerContext';
 
 const Player = () => {
-  const { seekBgRef, seekBarRef, track, isPlaying, play, pause, time, previous, next, seekInSong } = useContext(PlayerContext);
+  const { 
+    seekBgRef, 
+    seekBarRef, 
+    currentTrack, 
+    isPlaying, 
+    play, 
+    pause, 
+    time, 
+    previous, 
+    next, 
+    seekInSong 
+  } = useContext(PlayerContext);
 
   return (
     <div className="h-[10%] bg-black flex justify-between items-center px-4 text-white">
       <div className="hidden lg:flex items-center gap-4">
-        <img className="w-12" src={track.image} alt="" />
+        <img className="w-12" src={currentTrack?.image} alt="" />
         <div>
-          <p>{track.name}</p>
-          <p>{track.desc.slice(0, 12)}...</p>
+          <p>{currentTrack?.title}</p>
+          <p>{currentTrack?.artist?.name}</p>
         </div>
       </div>
       <div className="flex flex-col items-center gap-1 m-auto">
