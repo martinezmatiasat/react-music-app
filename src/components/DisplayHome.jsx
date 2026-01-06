@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import AlbumItem from '@/components/AlbumItem';
 import SongItem from '@/components/SongItem';
 import api from '@/helpers/api.js';
+const { VITE_API_URL } = import.meta.env;
 
 const DisplayHome = () => {
   const [albums, setAlbums] = useState([]);
@@ -10,17 +11,26 @@ const DisplayHome = () => {
 
   const fetchAlbums = async () => {
     const response = await api.get('/albums');
-    console.log('Albums response:', response.data);
-    setAlbums(response.data.result);
+    const processedAlbums = response.data?.result?.map(album => ({
+      ...album,
+      id: album._id,
+      image: album.image ? `${VITE_API_URL}/uploads/${album.image}` : '',
+    }));
+    setAlbums(processedAlbums);
   };
 
   const fetchSongs = async () => {
     const response = await api.get('/songs');
-    console.log('Songs response:', response.data);
-    setSongs(response.data.result);
+    const processedSongs = response.data?.result?.map(song => ({
+      ...song,
+      id: song._id,
+      audio: `${VITE_API_URL}/uploads/${song.audio}`,
+      image: song.artist?.image ? `${VITE_API_URL}/uploads/${song.artist.image}` : '',
+      artist: song.artist?.name || 'Unknown Artist',
+    }));
+    setSongs(processedSongs);
   };
 
-  // Fetch data when component mounts
   useEffect(() => {
     fetchAlbums();
     fetchSongs();
@@ -41,7 +51,7 @@ const DisplayHome = () => {
         <h1 className="my-5 font-bold text-2xl">Top Tracks</h1>
         <div className="flex overflow-auto">
           { songs.map((item, index) => (
-            <SongItem key={index} id={item._id} title={item.title} image={item.artist.image} audio={item.audio} />
+            <SongItem key={index} song={item} />
           )) }
         </div>
       </div>
