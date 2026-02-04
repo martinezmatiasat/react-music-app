@@ -43,4 +43,16 @@ const notifyError = (error) => {
   });
 };
 
-export { notifySuccess, notifyError };
+const notifyDevelopment = () => {
+  toast('Funcionalidad en desarrollo, disculpe las molestias', {
+    style: {
+      padding: '16px',
+      margin: '16px',
+      color: '#FFFAEE',
+      background: '#f59e0b',
+    },
+    icon: '!'
+  });
+};
+
+export { notifySuccess, notifyError, notifyDevelopment };

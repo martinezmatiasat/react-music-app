@@ -38,7 +38,6 @@ const PlayerContextProvider = ({ children }) => {
 
   const playQueue = (tracks, startIndex = 0) => {
     if (!Array.isArray(tracks) || tracks.length === 0) return;
-
     setPlaylist(tracks);
     setCurrentTrackIndex(startIndex);
   };

@@ -6,7 +6,7 @@ const Player = () => {
   const { 
     seekBgRef, 
     seekBarRef, 
-    currentTrack, 
+    currentTrack,
     isPlaying, 
     play, 
     pause, 

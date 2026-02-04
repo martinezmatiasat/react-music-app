@@ -1,13 +1,16 @@
-import { useContext } from 'react';
-import { PlayerContext } from '../context/PlayerContext';
+import { useNavigate } from 'react-router-dom';
 
 const AlbumItem = ({ album }) => {
-  const { playQueue } = useContext(PlayerContext);
+  const navigate = useNavigate();
+ 
+  const handleClick = () => {
+    navigate(`/album/${album._id}`);
+  };
 
   return (
     <div 
-      onClick={() => playQueue([album])} 
-      className="w-[180px] p-2 px-3 rounded cursor-pointer hover:bg-[#ffffff26]"
+      onClick={handleClick} 
+      className="w-[180px] p-2 px-3 mr-2 bg-[#1a1a1a] rounded cursor-pointer hover:bg-[#ffffff26]"
     >
       <img 
         className="rounded w-full" 

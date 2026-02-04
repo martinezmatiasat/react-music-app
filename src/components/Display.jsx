@@ -2,18 +2,15 @@ import { useEffect, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import DisplayHome from '@/components/DisplayHome';
 import DisplayAlbum from '@/components/DisplayAlbum';
-import { albumsData } from '@/assets/assets';
 
 const Display = () => {
   const displayRef = useRef(null);
   const location = useLocation();
   const isAlbumPage = location.pathname.startsWith('/album/');
-  const albumId = isAlbumPage ? location.pathname.split('/album/')[1] : null;
-  const bgColor = albumsData.find((album) => album.id === parseInt(albumId))?.bgColor || '#121212';
   
   useEffect(() => {
     if (isAlbumPage) {
-      displayRef.current.style.background = `linear-gradient(${bgColor}, #121212)`;
+      displayRef.current.style.background = `linear-gradient(#007575, #121212)`;
     } else {
       displayRef.current.style.background = '#121212';
     }
